@@ -18,6 +18,10 @@ To run the Python script, follow these steps:
 3. **Install requirements**
 
     ```bash
+    python -m pip install -r requirements.txt
+    ```
+    ### for some systems we might need to use python3 explicitly
+    ```bash
     python3 -m pip install -r requirements.txt
     ```
 4. **Update parent folder path in configs.yaml**
