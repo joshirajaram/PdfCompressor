@@ -2,6 +2,7 @@ from pypdf import PdfWriter
 import os
 import time
 import yaml
+import traceback
 
 def load_config(file_path):
     """Load configuration from a YAML file."""
@@ -24,7 +25,7 @@ def main(config):
     for file in answer_sheets:
         original_sizes[file] = os.path.getsize(os.path.join(src_filepath, file))
         
-    os.mkdir(src_filepath + "/compressed_pdfs")
+    os.mkdir(os.path.join(src_filepath, "compressed_pdfs"))
         
     for file in answer_sheets:
         print("Compressing file:", file)
@@ -34,7 +35,7 @@ def main(config):
             for img in page.images:
                 img.replace(img.image, quality=config["IMAGE_QUALITY_REDUCTION_FACTOR"])
 
-        with open(src_filepath + "/compressed_pdfs/" + file, "wb") as f:
+        with open(os.path.join(src_filepath, "compressed_pdfs", file), "wb") as f:
             writer.write(f)
             
     end_time = time.time()
@@ -52,5 +53,6 @@ if __name__ == '__main__':
     config = load_config('./configs.yaml')
     try:
         main(config)
-    except:
+    except Exception:
         print("Exception occurred. Please check stacktrace.")
+        print(traceback.format_exc())

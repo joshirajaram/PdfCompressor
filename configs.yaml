@@ -1,2 +1,2 @@
-SRC_ANSWER_SHEETS_FILE_PATH: '/Users/joshirajaram/Documents/RJ/PdfCompressor/vvce_bk'
+SRC_ANSWER_SHEETS_FILE_PATH: '/path/to/src/answer/sheets'
 IMAGE_QUALITY_REDUCTION_FACTOR: 10
