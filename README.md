@@ -39,3 +39,7 @@ To run the Python script, follow these steps:
     ```bash
     ./pdf_compressor
     ```
+7. **In case executable is throwing exception, please run using the below command**
+    ```bash
+    python pdf_compressor.py
+    ```

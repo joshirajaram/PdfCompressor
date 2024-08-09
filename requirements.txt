@@ -1,3 +1,4 @@
+Pillow==10.1.0
 pyinstaller==6.9.0
 pyinstaller-hooks-contrib==2024.7
 pypdf==4.3.1
