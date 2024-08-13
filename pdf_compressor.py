@@ -3,6 +3,7 @@ import os
 import time
 import yaml
 import traceback
+import shutil
 
 def load_config(file_path):
     """Load configuration from a YAML file."""
@@ -37,6 +38,8 @@ def main(config):
 
         with open(os.path.join(src_filepath, "compressed_pdfs", file), "wb") as f:
             writer.write(f)
+            
+    shutil.make_archive("zipped_compressed_pdfs", 'zip', os.path.join(src_filepath, "compressed_pdfs"))
             
     end_time = time.time()
 
