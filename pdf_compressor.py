@@ -4,6 +4,7 @@ import time
 import yaml
 import traceback
 import shutil
+from datetime import datetime
 
 def load_config(file_path):
     """Load configuration from a YAML file."""
@@ -26,7 +27,10 @@ def main(config):
     for file in answer_sheets:
         original_sizes[file] = os.path.getsize(os.path.join(src_filepath, file))
         
-    os.mkdir(os.path.join(src_filepath, "compressed_pdfs"))
+    now = datetime.now()
+    formatted_time = now.strftime('%Y-%m-%d_%H:%M:%S')
+    dirname = "compressed_pdfs" + "_" + str(len(answer_sheets)) + "_scripts_" + formatted_time
+    os.mkdir(os.path.join(src_filepath, dirname))
         
     for file in answer_sheets:
         print("Compressing file:", file)
@@ -36,17 +40,17 @@ def main(config):
             for img in page.images:
                 img.replace(img.image, quality=config["IMAGE_QUALITY_REDUCTION_FACTOR"])
 
-        with open(os.path.join(src_filepath, "compressed_pdfs", file), "wb") as f:
+        with open(os.path.join(src_filepath, dirname, file), "wb") as f:
             writer.write(f)
             
-    shutil.make_archive("zipped_compressed_pdfs", 'zip', os.path.join(src_filepath, "compressed_pdfs"))
+    shutil.make_archive("zipped_"+dirname, 'zip', os.path.join(src_filepath, dirname))
             
     end_time = time.time()
 
     print("Total time elapsed: ", end_time - start_time)
 
     for file in answer_sheets:
-        compressed_sizes[file] = os.path.getsize(os.path.join(src_filepath, "compressed_pdfs", file))
+        compressed_sizes[file] = os.path.getsize(os.path.join(src_filepath, dirname, file))
         
     for file in answer_sheets:
         print("File name:", file,  "Original size:", original_sizes[file], 
