@@ -28,7 +28,7 @@ def main(config):
         original_sizes[file] = os.path.getsize(os.path.join(src_filepath, file))
         
     now = datetime.now()
-    formatted_time = now.strftime('%Y-%m-%d_%H:%M:%S')
+    formatted_time = now.strftime('%Y-%m-%d_%H-%M-%S')
     dirname = "compressed_pdfs" + "_" + str(len(answer_sheets)) + "_scripts_" + formatted_time
     os.mkdir(os.path.join(src_filepath, dirname))
         
